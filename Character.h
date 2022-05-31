@@ -26,10 +26,11 @@ public:
 	int GetPosX();
 
 	int GetPosY();
-
+	bool speedDown;
+	bool cheat;
 private:
 	int posX, posY;
-
+	
 	int status;
 };
 

@@ -471,10 +471,11 @@ void DrawTime(LTexture gTime, LTexture gCurrentTime, SDL_Color textColor, SDL_Re
 	}
 	else if(CurrentTime.length()==2) {
 		temp += "0.";
-		temp += CurrentTime.substr(1, 0);
+		temp += CurrentTime.substr(0, 2);
 	}
 	else {
-		temp += "0.";
+		temp += "0.0";
+		temp += CurrentTime.substr(0, 1);
 	}
 	if (gCurrentTime.LoadFromRenderedText(temp, gFont, textColor, gRenderer))
 	{

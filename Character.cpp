@@ -4,8 +4,9 @@ Character::Character()
 {
 	posX = SCREEN_WIDTH - 700;
 	posY = GROUND;
-
+	speedDown = false;
 	status = 0;
+	cheat = false;
 }
 
 bool Character::OnGround()
@@ -26,7 +27,17 @@ void Character::HandleEvent(SDL_Event& e, Mix_Chunk *gJump)
 					Mix_PlayChannel(MIX_CHANNEL, gJump, NOT_REPEATITIVE);
 					status = JUMP;
 				}
+				break;
 			}
+			case SDLK_LEFT:
+				if (OnGround()) {
+					Mix_PlayChannel(MIX_CHANNEL, gJump, NOT_REPEATITIVE);
+					speedDown = true;
+					cheat = true;
+				}
+				break;
+			default:
+				break;
 		}
 	}
 }

@@ -134,7 +134,7 @@ int main(int argc, char* argv[])
 				int frame_Character = 0;
 				int frame_Enemy = 0;
 				std::string highscore = GetHighScoreFromFile("high_score.txt");
-				
+				character.cheat = false;
 				SDL_Event e;
 				Enemy enemy1(ON_GROUND_ENEMY);
 				Enemy enemy2(ON_GROUND_ENEMY);
@@ -154,6 +154,10 @@ int main(int argc, char* argv[])
 					{
 						UpdateGameTimeAndScore(time, acceleration, score,realTime);
 						std::cout << "Time: " << time << std::endl;
+						if (character.speedDown) {
+							character.speedDown = false;
+							if(acceleration>-2)acceleration -= 1;
+						}
 						while (SDL_PollEvent(&e) != 0)
 						{
 							if (e.type == SDL_QUIT)
@@ -213,7 +217,11 @@ int main(int argc, char* argv[])
 						{
 							Mix_PauseMusic();
 							Mix_PlayChannel(MIX_CHANNEL, gLose, NOT_REPEATITIVE);
-							UpdateHighScore("high_score.txt", score, highscore);
+							std::cout << "Status: " << character.cheat << std::endl;
+							if (!character.cheat) {
+								UpdateHighScore("high_score.txt", score, highscore);
+							}
+							
 							Quit = true;
 						}
 

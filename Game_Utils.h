@@ -16,7 +16,7 @@ void UpdateHighScore(std::string path,
     const int& score, 
     const std::string& old_high_score);
 
-int UpdateGameTimeAndScore(int& time, int& speed, int& score);
+int UpdateGameTimeAndScore(int& time, int& speed, int& score,int& realTime);
 
 void RenderScrollingBackground(std::vector <double>& offsetSpeed,
     LTexture(&gBackgroundTexture)[BACKGROUND_LAYER],
@@ -104,5 +104,5 @@ void DrawEndGameSelection(LTexture gLoseTexture,
     SDL_Event* e,
     SDL_Renderer* gRenderer,
     bool& Play_Again);
-
+void DrawTime(LTexture gTime, LTexture gCurrentTime, SDL_Color textColor, SDL_Renderer* gRenderer, TTF_Font* gFont, const std::string& CurrentTime);
 #endif // !GAME_UTILS_H_

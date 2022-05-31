@@ -53,7 +53,8 @@ LTexture gText1Texture;
 LTexture gScoreTexture;
 LTexture gText2Texture;
 LTexture gHighScoreTexture;
-
+LTexture gTime;
+LTexture gCurrentTime;
 Button PlayButton(PLAY_BUTON_POSX, PLAY_BUTTON_POSY);
 Button HelpButton(HELP_BUTTON_POSX, HELP_BUTTON_POSY);
 Button ExitButton(EXIT_BUTTON_POSX, EXIT_BUTTON_POSY);
@@ -127,6 +128,7 @@ int main(int argc, char* argv[])
 			{
 				srand(time(NULL));
 				int time = 0;
+				int realTime = 0;
 				int score = 0;
 				int acceleration = 0;
 				int frame_Character = 0;
@@ -150,8 +152,8 @@ int main(int argc, char* argv[])
 				{
 					if (Game_State)
 					{
-						UpdateGameTimeAndScore(time, acceleration, score);
-
+						UpdateGameTimeAndScore(time, acceleration, score,realTime);
+						std::cout << "Time: " << time << std::endl;
 						while (SDL_PollEvent(&e) != 0)
 						{
 							if (e.type == SDL_QUIT)
@@ -204,7 +206,7 @@ int main(int argc, char* argv[])
 
 						DrawPlayerScore(gText1Texture, gScoreTexture, textColor, gRenderer, gFont, score);
 						DrawPlayerHighScore(gText2Texture, gHighScoreTexture, textColor, gRenderer, gFont, highscore);
-
+						DrawTime(gTime, gCurrentTime, textColor, gRenderer, gFont, std::to_string(realTime));
 						if (CheckEnemyColission(character,
 							enemy1, enemy2, enemy3,
 							currentClip_Character, currentClip_Enemy))
@@ -341,7 +343,7 @@ bool LoadMedia()
 
 	else
 	{
-		gFont = TTF_OpenFont("font/pixel_font.ttf", 28);
+		gFont = TTF_OpenFont("font/Aller_Rg.ttf", 28);
 		if (gFont == NULL)
 		{
 			LogError("Failed to load font", MIX_ERROR);
@@ -353,6 +355,10 @@ bool LoadMedia()
 			{
 				std::cout << "Failed to render text1 texture" << std::endl;
 				success = false;
+			}
+
+			if (!gTime.LoadFromRenderedText("Thoi gian: ", gFont, textColor, gRenderer)) {
+				std::cout << "Faild to load gTime" << std::endl;
 			}
 
 			if (!gText2Texture.LoadFromRenderedText("Diem cao: ", gFont, textColor, gRenderer))

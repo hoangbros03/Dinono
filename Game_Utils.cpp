@@ -34,7 +34,7 @@ void UpdateHighScore(std::string path,
 
 int UpdateGameTimeAndScore(int& time,
 	int& speed,
-	int& score)
+	int& score, int& realTime)
 {
 	if (time == TIME_MAX)
 	{
@@ -51,7 +51,7 @@ int UpdateGameTimeAndScore(int& time,
 	}
 	
 	time += TIME_INCREASEMENT;
-
+	realTime += TIME_INCREASEMENT;
 	return time;
 }
 
@@ -461,7 +461,26 @@ void DrawPlayerHighScore(LTexture gTextTexture,
 		gHighScoreTexture.Render(HIGH_SCORE_POSX, HIGH_SCORE_POSY, gRenderer);
 	}
 }
-
+void DrawTime(LTexture gTime, LTexture gCurrentTime, SDL_Color textColor, SDL_Renderer* gRenderer, TTF_Font* gFont, const std::string& CurrentTime) {
+	gTime.Render(400, 20, gRenderer);
+	std::string temp = "";
+	if (CurrentTime.length()>=3) {
+		temp += CurrentTime.substr(0, CurrentTime.length() - 2);
+		temp += ".";
+		temp += CurrentTime.substr(CurrentTime.length() - 2, 2);
+	}
+	else if(CurrentTime.length()==2) {
+		temp += "0.";
+		temp += CurrentTime.substr(1, 0);
+	}
+	else {
+		temp += "0.";
+	}
+	if (gCurrentTime.LoadFromRenderedText(temp, gFont, textColor, gRenderer))
+	{
+		gCurrentTime.Render(570, 20, gRenderer);
+	}
+}
 void DrawEndGameSelection(LTexture gLoseTexture,
 	SDL_Event *e, 
 	SDL_Renderer *gRenderer,

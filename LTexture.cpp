@@ -96,6 +96,7 @@ void LTexture::Render(int x, int y, SDL_Renderer* gRenderer, SDL_Rect* clip)
 	}
 
 	SDL_RenderCopy(gRenderer, mTexture, clip, &renderSpace);
+	//SDL_DestroyTexture(mTexture);
 }
 
 int LTexture::GetWidth()
@@ -106,4 +107,8 @@ int LTexture::GetWidth()
 int LTexture::GetHeight()
 {
 	return mHeight;
+}
+
+void LTexture::DestroyTexture() {
+	SDL_DestroyTexture(mTexture);
 }

@@ -119,6 +119,8 @@ int main(int argc, char* argv[])
 				ExitButton.Render(currentClip_Exit, gRenderer, gExitButtonTexture);
 
 				SDL_RenderPresent(gRenderer);
+
+				
 			}
 
 			while (Play_Again)
@@ -216,6 +218,7 @@ int main(int argc, char* argv[])
 
 						SDL_RenderPresent(gRenderer);
 
+						
 						ControlCharFrame(frame_Character);
 						ControlEnemyFrame(frame_Enemy);
 					}
@@ -346,13 +349,13 @@ bool LoadMedia()
 		}
 		else
 		{
-			if (!gText1Texture.LoadFromRenderedText("Your score: ", gFont, textColor, gRenderer))
+			if (!gText1Texture.LoadFromRenderedText("So diem: ", gFont, textColor, gRenderer))
 			{
 				std::cout << "Failed to render text1 texture" << std::endl;
 				success = false;
 			}
 
-			if (!gText2Texture.LoadFromRenderedText("High score: ", gFont, textColor, gRenderer))
+			if (!gText2Texture.LoadFromRenderedText("Diem cao: ", gFont, textColor, gRenderer))
 			{
 				std::cout << "Failed to render text2 texture" << std::endl;
 				success = false;

@@ -19,7 +19,7 @@ public:
 	void Render(int x, int y, SDL_Renderer* gRenderer, SDL_Rect* clip = nullptr);
 
 	int GetWidth();
-
+	void DestroyTexture();
 	int GetHeight();
 
 private:
